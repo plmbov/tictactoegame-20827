@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
+    <title>Tic Tac Toe Game</title>
+</head>
+
+<body>
+    <header>
+        <h1>TicTacToe Game</h1>
+    </header>
+    <div class="backdrop show" id='backdrop'></div>
+    <div class="set-names-window" id="setNamesWindow">
+        <form id="namesForm">
+            <label for="playerName">Set names:</label>
+            <div class="player-circle">
+                <span>O:</span>
+                <input type="text" value="Player One" id="playerOneName" spellcheck="false" autocomplete="off">
+            </div>
+            <div class="player-x">
+                <span>X:</span>
+                <input type="text" value="Player Two" id="playerTwoName" spellcheck="false" autocomplete="off">
+            </div>
+            <button type="submit" id="setNames">Confirm</button>
+        </form>
+    </div>
+    <div class="players-names">
+        <div class="player-circle-name">
+            <span>O:</span>
+            <span class="player-circle" id="playerOneNameDisplay">Player One</span>
+        </div>
+        <div class="player-x-name">
+            <span>X:</span>
+            <span class="player-x" id="playerTwoNameDisplay">Player Two</span>
+        </div>
+        <button class="change-names-button" id="changeNamesButton">Change names</button>
+    </div>
+    <div class="board" id="board">
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+    </div>
+    <div class="end-game-message" id="endGameMessage">
+        <div data-end-game-message-text></div>
+        <button id="restartButton">Restart</button>
+    </div>
+</body>
+
+</html>

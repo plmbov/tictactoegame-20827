@@ -1,0 +1,322 @@
+*, *::before, *::after{
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-color: var(--background-color);
+    font-family: 'Pacifico';
+}
+
+:root{
+    --cell-size: 150px;
+    --background-color: #EAE7DC;
+    --hover-color: #D8C3A5;
+    --mark-color: #8E8D8A;
+    --font-color: #E85A4F;
+    --hover-button-color: #E98074;
+    --mark-size: calc(var(--cell-size) * .9)
+}
+
+header{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+}
+
+header h1{
+    margin: 40px 0 0 0;
+    text-align: center;
+    font-size: 70px;
+    color: var(--font-color);
+}
+
+.board{
+    position: absolute;
+    height: 60%;
+    width: 100%;
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    grid-template-columns: repeat(3, auto);
+}
+
+.cell{
+    height: var(--cell-size);
+    width: var(--cell-size);
+    background-color: var(--background-color);
+    border: 1px solid var(--mark-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3){
+    border-top: none;
+}
+
+.cell:last-child,
+.cell:nth-child(8),
+.cell:nth-child(7){
+    border-bottom: none;
+}
+
+.cell:nth-child(3n+1){
+border-left: none;
+}
+
+.cell:nth-child(3n+3){
+border-right: none;
+}
+
+.cell.x,
+.cell.circle{
+    cursor: not-allowed;
+}
+
+.cell.x::before,
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.x .cell:not(.x):not(.circle):hover::after{
+    content: '';
+    height: var(--mark-size);
+    width: calc(var(--mark-size) * .15);
+    background-color: var(--mark-color);
+    border-radius: 6px;
+    transition: ease 1s;
+}
+
+.board.x .cell:not(.x):not(.circle)::before,
+.board.x .cell:not(.x):not(.circle)::after{
+    content: '';
+    height: var(--mark-size);
+    width: calc(var(--mark-size) * .15);
+    background-color: var(--background-color);
+    border-radius: 6px;
+}
+
+.cell.x::before{
+    transform: rotate(-45deg);
+    position: absolute;
+}
+
+.board.x .cell:not(.x):not(.circle)::before{
+    transform: rotate(-45deg);
+    position: absolute;
+    background-color: var(--background-color);
+}
+
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::after{
+    transform: rotate(45deg);
+    position: absolute;
+}
+
+.board.x .cell:not(.x):not(.circle)::after{
+    transform: rotate(45deg);
+    position: absolute;
+    background-color: var(--background-color);
+}
+
+.cell.circle::before,
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::before,
+.board.circle .cell:not(.x):not(.circle):hover::after{
+    content: '';
+    height: calc(var(--mark-size) * .9);
+    width: calc(var(--mark-size) * .9);
+    background-color: var(--mark-color);
+    border-radius: 50%;
+    transition: ease 1s;
+}
+
+.board.circle .cell:not(.x):not(.circle)::before{
+    content: '';
+    height: calc(var(--mark-size) * .9);
+    width: calc(var(--mark-size) * .9);
+    background-color: transparent;
+    border-radius: 50%;
+}
+
+.board.circle .cell:not(.x):not(.circle):hover::before{
+    position: absolute;
+    content: '';
+    height: calc(var(--mark-size) * .9);
+    width: calc(var(--mark-size) * .9);
+    background-color: var(--background-color);
+    border-radius: 50%;
+}
+
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::after{
+    position: absolute;
+    width: calc(var(--mark-size) * .62);
+    height: calc(var(--mark-size) * .62);
+    background-color: var(--background-color);
+}
+
+.board.circle .cell:not(.x):not(.circle)::after{
+    position: absolute;
+    width: calc(var(--mark-size) * .62);
+    height: calc(var(--mark-size) * .62);
+    background-color: var(--background-color);
+}
+
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.x .cell:not(.x):not(.circle):hover::after,
+.board.circle .cell:not(.x):not(.circle):hover::before{
+    background-color: var(--hover-color);
+}
+
+.end-game-message{
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(142, 141, 138, 0.9);
+    color: white;
+    font-size: 5rem;
+}
+
+.end-game-message.show{
+        display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#restartButton{
+    font-family: 'Pacifico';
+    font-size: 2rem;
+    color: var(--background-color);
+    background-color: var(--hover-button-color);
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    outline: none;
+}
+
+#restartButton:hover{
+    color: var(--background-color);
+    background-color: var(--font-color);
+    transition: ease .5s;
+}
+.backdrop{
+    display: none;
+}
+
+.backdrop.show{
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(142, 141, 138, 0.9);
+    z-index: 1;
+}
+
+.set-names-window{
+    position: fixed;
+    top: -50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0 auto;
+    z-index: 2;
+    text-align: center;
+    transition: .7s;
+}
+
+.set-names-window.show{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.set-names-window form{
+    color: var(--font-color);
+    background-color: var(--background-color);
+    width: 30vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    border: 4px solid;
+    border-radius: 50px;
+    padding: 10px;
+    font-size: 30px;
+}
+
+.set-names-window input{
+    margin: 20px;
+    font-family: 'Pacifico';
+    font-size: 20px;
+    color: rgb(100, 99, 96);
+    background-color: transparent;
+    border: none;
+    border-bottom: 4px solid var(--font-color);
+    outline: none;
+}
+
+.set-names-window form button{
+    width: fit-content;
+    margin: 0 auto;
+    font-family: 'Pacifico';
+    font-size: 2rem;
+    color: var(--background-color);
+    background-color: var(--hover-button-color);
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    outline: none;
+}
+
+.set-names-window form button:hover{
+    color: var(--background-color);
+    background-color: var(--font-color);
+    transition: ease .5s;
+}
+
+.players-names{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    color: var(--hover-button-color);
+    margin: 30px 0;
+}
+
+.player-x-name,
+.player-circle-name{
+margin: 0 20px
+}
+.player-x-name .player-x,
+.player-circle-name .player-circle{
+color: var(--mark-color);
+}
+
+.change-names-button{
+    width: fit-content;
+    font-family: 'Pacifico';
+    font-size: 1rem;
+    color: var(--background-color);
+    background-color: var(--hover-button-color);
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    outline: none;
+}
+
+.change-names-button:hover{
+    color: var(--background-color);
+    background-color: var(--font-color);
+    transition: ease .5s;
+}
