@@ -15,16 +15,18 @@
         <h1>TicTacToe Game</h1>
     </header>
     <div class="backdrop show" id='backdrop'></div>
-    <div class="set-names-window" id="setNamesWindow">
+    <div class="set-names-window show" id="setNamesWindow">
         <form id="namesForm">
             <label for="playerName">Set names:</label>
             <div class="player-circle">
                 <span>O:</span>
-                <input type="text" value="Player One" id="playerOneName" spellcheck="false" autocomplete="off">
+                <input type="text" value="Player One" id="playerOneName" spellcheck="false" autocomplete="off"
+                    onfocus="this.value=''" />
             </div>
             <div class="player-x">
                 <span>X:</span>
-                <input type="text" value="Player Two" id="playerTwoName" spellcheck="false" autocomplete="off">
+                <input type="text" value="Player Two" id="playerTwoName" spellcheck="false" autocomplete="off"
+                    onfocus="this.value=''" />
             </div>
             <button type="submit" id="setNames">Confirm</button>
         </form>
@@ -52,8 +54,14 @@
         <div class="cell" data-cell></div>
     </div>
     <div class="end-game-message" id="endGameMessage">
-        <div data-end-game-message-text></div>
+        <div id="endGameMessageText"></div>
         <button id="restartButton">Restart</button>
+    </div>
+    <div class="who-starts-message" id="whoStartsMessage">
+        <div id="whoStartsMessageText"></div>
+    </div>
+    <div class="empty-name-fields-notification" id="emptyNameFieldsNotification">
+        <h2>Please fill in names of both players!</h2>
     </div>
 </body>
 

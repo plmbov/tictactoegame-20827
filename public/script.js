@@ -12,8 +12,10 @@ const WINNING_COMBINATIONS = [
 ]
 const cellElements = document.querySelectorAll('[data-cell]')
 const board = document.getElementById('board')
+const whoStartsMessage = document.getElementById('whoStartsMessage')
+const whoStartsMessageText = document.getElementById('whoStartsMessageText')
 const endGameMessage = document.getElementById('endGameMessage')
-let endGameMessageText = document.querySelector('[data-end-game-message-text]')
+const endGameMessageText = document.getElementById('endGameMessageText')
 const restartButton = document.getElementById('restartButton')
 const setNamesWindow = document.getElementById('setNamesWindow')
 const backdrop = document.getElementById('backdrop')
@@ -22,6 +24,7 @@ const setNamesButton = document.getElementById('setNames')
 const playerOneNameDisplay = document.getElementById('playerOneNameDisplay')
 const playerTwoNameDisplay = document.getElementById('playerTwoNameDisplay')
 const changeNamesButton = document.getElementById('changeNamesButton')
+const emptyNameFieldsNotification = document.getElementById('emptyNameFieldsNotification')
 
 let circleTurn = Math.random() >= 0.5
 
@@ -39,17 +42,25 @@ backdrop.addEventListener('click', () => {
 
 
 setNamesWindow.classList.add('show')
-startGame()
 
 function setPlayersNames(event) {
     event.preventDefault()
-    playerOneNameDisplay.innerText = document.getElementById('playerOneName').value
-    playerTwoNameDisplay.innerText = document.getElementById('playerTwoName').value
-    setNamesWindow.classList.remove('show')
-    backdrop.classList.remove('show')
+    if (document.getElementById('playerOneName').value === '' || document.getElementById('playerTwoName').value === '') {
+        emptyNameFieldsNotification.classList.add('show')
+        setTimeout(() => {
+            emptyNameFieldsNotification.classList.remove('show')
+        }, 3000);
+    } else {
+        playerOneNameDisplay.innerText = document.getElementById('playerOneName').value
+        playerTwoNameDisplay.innerText = document.getElementById('playerTwoName').value
+        setNamesWindow.classList.remove('show')
+        backdrop.classList.remove('show')
+        startGame()
+    }
 }
 
 function startGame() {
+    whoBegins()
     cellElements.forEach(el => {
         el.classList.remove(X_CLASS)
         el.classList.remove(CIRCLE_CLASS)
@@ -58,6 +69,14 @@ function startGame() {
     })
     setBoardHoverClass()
     endGameMessage.classList.remove('show')
+}
+
+function whoBegins() {
+    whoStartsMessage.classList.add('show')
+    whoStartsMessageText.innerHTML = `${circleTurn ? `${document.getElementById('playerOneName').value}` : `${document.getElementById('playerTwoName').value}`} begins!`
+    setTimeout(() => {
+        whoStartsMessage.classList.remove('show')
+    }, 2000);
 }
 
 function handleClick(event) {

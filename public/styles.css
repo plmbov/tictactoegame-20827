@@ -289,6 +289,24 @@ border-right: none;
     transition: ease .5s;
 }
 
+.who-starts-message{
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(142, 141, 138, 0.9);
+    color: white;
+    font-size: 5rem;
+    text-align: center;
+}
+.who-starts-message.show{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .players-names{
     display: flex;
     justify-content: center;
@@ -324,6 +342,26 @@ color: var(--mark-color);
     color: var(--background-color);
     background-color: var(--font-color);
     transition: ease .5s;
+}
+
+.empty-name-fields-notification{
+    color: var(--font-color);
+    position: fixed;
+    left: 0;
+    bottom: -70px;
+    right: 0;
+    text-align: center;
+    z-index: 10;
+    transition: ease 1s;
+}
+
+.empty-name-fields-notification.show{
+    color: var(--font-color);
+    left: 0;
+    bottom: 0;
+    right: 0;
+    text-align: center;
+    z-index: 10;
 }
 
 @media (min-width : 1200px) and (max-width : 1500px){
